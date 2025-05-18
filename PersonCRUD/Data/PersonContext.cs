@@ -1,6 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using PersonCRUD.Models;
+
 namespace PersonCRUD.Data;
 
-public class PersonContext
+public class PersonContext : DbContext
 {
-    
-}
+     public DbSet<PersonModel> People { get; set; }
+
+     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+     {
+          optionsBuilder.UseSqlite("Data Source=Person.sqlite");
+          base.OnConfiguring(optionsBuilder);
+     }
+} 
